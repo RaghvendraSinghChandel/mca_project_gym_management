@@ -12,7 +12,7 @@
 *.log
 *.tmp
 
-# Ignore dependency directories
+# Ignore dependency unnecessary directories
 node_modules/
 venv/
 env/
