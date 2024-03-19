@@ -7,11 +7,27 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.http import JsonResponse
 from .models import Workout_master
-
+import dj_database_url
+import os
 import datetime
 
 import mysql.connector as mcdb
-conn = mcdb.connect(host="localhost", user="root", passwd="raghvendra", database='gymdb')
+
+# Assuming you have the individual connection parameters in your environment
+DB_HOST = os.environ.get('DB_HOST')
+DB_PORT = 3306
+DB_USER = os.environ.get('DB_USER')
+DB_PASSWORD = os.environ.get('DB_PASSWORD')
+DB_NAME = os.environ.get('DB_NAME')
+
+# Establish a connection to the database using the individual parameters
+conn = mcdb.connect(
+    host=DB_HOST,
+    port=DB_PORT,
+    user=DB_USER,
+    password=DB_PASSWORD,
+    database=DB_NAME
+)
 print('Successfully connected to database')
 cur = conn.cursor()
 

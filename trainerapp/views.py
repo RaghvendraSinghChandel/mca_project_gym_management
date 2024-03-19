@@ -4,11 +4,24 @@ from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
 from django.conf.urls.static import static
 from django.core.mail import send_mail
-from django.conf import settings
+import os
 # Create your views here.
 
 import mysql.connector as mcdb
-conn = mcdb.connect(host="localhost", user="root", passwd="raghvendra", database='fitness')
+DB_HOST = os.environ.get('DB_HOST')
+DB_PORT = 3306
+DB_USER = os.environ.get('DB_USER')
+DB_PASSWORD = os.environ.get('DB_PASSWORD')
+DB_NAME = os.environ.get('DB_NAME')
+
+# Establish a connection to the database using the individual parameters
+conn = mcdb.connect(
+    host=DB_HOST,
+    port=DB_PORT,
+    user=DB_USER,
+    password=DB_PASSWORD,
+    database=DB_NAME
+)
 print('Successfully connected to database')
 cur = conn.cursor()
 
