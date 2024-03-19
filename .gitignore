@@ -29,3 +29,4 @@ userside/migrations/
 gymmanage/__pycache__/
 trainerapp/__pycache__/
 trainerapp/migrations/
+.env

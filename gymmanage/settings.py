@@ -26,8 +26,8 @@ SECRET_KEY = 'j_dkz&gtj28m^64dv9_hcz(5e$m5m9*u)x0@=aca0*k=a@mc2x'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    # 'https://0fbc-2401-4900-1c6e-f219-11ae-fe2e-87b6-4c55.ngrok-free.app',
-    # 'http://127.0.0.1:8000/'
+    # 'http://127.0.0.1:8000/',
+    # '.vercel.app'
 ]
 
 
@@ -81,16 +81,34 @@ WSGI_APPLICATION = 'gymmanage.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'gym',
-        'USER': 'root',
-        'PASSWORD': 'raghvendra',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
+# Accessing DATABASE_URL environment variable
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
+DB_HOST = os.environ.get('DB_HOST')
+DB_PORT = os.environ.get('DB_PORT')
+DB_USER = os.environ.get('DB_USER')
+DB_PASSWORD = os.environ.get('DB_PASSWORD')
+DB_NAME = os.environ.get('DB_NAME')
+
+# Define the database configuration dictionary
+DATABASE_CONFIG = {
+    'ENGINE': 'django.db.backends.mysql',
+    'NAME': DB_NAME,
+    'USER': DB_USER,
+    'PASSWORD': DB_PASSWORD,
+    'HOST': DB_HOST,
+    'PORT': DB_PORT,
 }
+
+# Set the DATABASES setting
+DATABASES = {
+    'default': DATABASE_CONFIG
+}
+
 
 
 # Password validation
@@ -129,7 +147,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
+STATICFILES_DIRS = ['static']
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
