@@ -24,24 +24,20 @@ if ! python3 -c "import django" &> /dev/null; then
     pip install django || handle_error "Failed to install Django"
 fi
 
-echo "Installing system dependencies for MySQL client..."
-# Install MySQL client library using pip
-pip install mysqlclient || handle_error "Failed to install system dependencies for MySQL client"
-
-# Install Python dependencies
 echo "Installing Python dependencies from requirements.txt..."
+# Install Python dependencies
 pip install -r "$DIR/requirements.txt" || handle_error "Failed to install Python dependencies"
 
-# Run database migration script
 echo "Applying database migrations..."
+# Run database migration script
 python3 manage.py migrate || handle_error "Database migration failed"
 
-# Run fitness.sql to create required tables
 echo "Creating tables from fitness.sql..."
+# Run fitness.sql to create required tables
 mysql -h "localhost" -u "root" -p"raghvendra" "gymdb" < "$DIR/fitness.sql" || handle_error "Failed to execute fitness.sql"
 
-# Collect static files
 echo "Collecting static files..."
+# Collect static files
 python3 manage.py collectstatic --noinput || handle_error "Failed to collect static files"
 
 # Deactivate the virtual environment
