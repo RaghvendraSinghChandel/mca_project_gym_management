@@ -26,8 +26,8 @@ SECRET_KEY = 'j_dkz&gtj28m^64dv9_hcz(5e$m5m9*u)x0@=aca0*k=a@mc2x'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    # 'http://127.0.0.1:8000/',
-    # '.vercel.app'
+    '.vercel.app',
+    '127.0.0.1'
 ]
 
 
@@ -101,7 +101,7 @@ DATABASE_CONFIG = {
     'USER': DB_USER,
     'PASSWORD': DB_PASSWORD,
     'HOST': DB_HOST,
-    'PORT': DB_PORT,
+    'PORT': 3306,
 }
 
 # Set the DATABASES setting
