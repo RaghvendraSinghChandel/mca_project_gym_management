@@ -26,8 +26,8 @@ SECRET_KEY = 'j_dkz&gtj28m^64dv9_hcz(5e$m5m9*u)x0@=aca0*k=a@mc2x'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    # 'http://127.0.0.1:8000/',
-    # '.vercel.app'
+    '.vercel.app',
+    '127.0.0.1'
 ]
 
 
@@ -83,25 +83,14 @@ WSGI_APPLICATION = 'gymmanage.wsgi.application'
 
 # Accessing DATABASE_URL environment variable
 
-from dotenv import load_dotenv
-
-load_dotenv()
-
-
-DB_HOST = os.environ.get('DB_HOST')
-DB_PORT = os.environ.get('DB_PORT')
-DB_USER = os.environ.get('DB_USER')
-DB_PASSWORD = os.environ.get('DB_PASSWORD')
-DB_NAME = os.environ.get('DB_NAME')
-
 # Define the database configuration dictionary
 DATABASE_CONFIG = {
     'ENGINE': 'django.db.backends.mysql',
-    'NAME': DB_NAME,
-    'USER': DB_USER,
-    'PASSWORD': DB_PASSWORD,
-    'HOST': DB_HOST,
-    'PORT': DB_PORT,
+    'NAME': 'gymdb',
+    'USER': 'root',
+    'PASSWORD': 'raghvendra',
+    'HOST': 'localhost',
+    'PORT': 3306,
 }
 
 # Set the DATABASES setting

@@ -6,25 +6,25 @@ handle_error() {
     exit 1
 }
 
-# Check if environment variables are set
-if [[ -z "$DB_HOST" || -z "$DB_USER" || -z "$DB_PASSWORD" || -z "$DB_NAME" ]]; then
-    handle_error "One or more required environment variables are not set"
+# Upgrade pip
+echo "Upgrading pip..."
+pip install --upgrade pip || handle_error "Failed to upgrade pip"
+
+# Check if Django is installed
+if ! python3 -c "import django" &> /dev/null; then
+    echo "Django is not installed. Installing Django..."
+    pip install django || handle_error "Failed to install Django"
 fi
 
-# Run database migration script
-echo "Applying database migrations..."
-python3.9 manage.py migrate || handle_error "Database migration failed"
+# Get the directory of the script
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-# Run fitness.sql to create required tables
-echo "Creating tables from fitness.sql..."
-mysql -h "$DB_HOST" -u "$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" < fitness.sql || handle_error "Failed to execute fitness.sql"
+# Activate the virtual environment
+source "$DIR/myenv/bin/activate" || handle_error "Failed to activate virtual environment"
 
 # Install Python dependencies
-echo "Installing Python dependencies..."
+echo "Installing Python dependencies from requirements.txt..."
 pip install -r requirements.txt || handle_error "Failed to install Python dependencies"
 
-# Collect static files
-echo "Collecting static files..."
-python3.9 manage.py collectstatic --noinput || handle_error "Failed to collect static files"
 
-echo "Build completed successfully."
+echo "Setup complete!"
