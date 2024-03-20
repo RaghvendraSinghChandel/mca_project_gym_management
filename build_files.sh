@@ -7,7 +7,7 @@ handle_error() {
 }
 
 # Activate virtual environment
-source /Users/clanap.technologies/Downloads/gymTest/myenv/bin/activate
+source myenv/bin/activate
 
 # Check if Django is installed
 if ! python3.9 -c "import django" &>/dev/null; then
