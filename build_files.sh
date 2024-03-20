@@ -6,8 +6,11 @@ handle_error() {
     exit 1
 }
 
+# Get the directory of the script
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
 # Activate the virtual environment
-source /Users/clanap.technologies/Downloads/gymTest/myenv/bin/activate || handle_error "Failed to activate virtual environment"
+source "$DIR/myenv/bin/activate" || handle_error "Failed to activate virtual environment"
 
 # Check if dotenv is installed
 if ! python -c "import dotenv" &> /dev/null; then
