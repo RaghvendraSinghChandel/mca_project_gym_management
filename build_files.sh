@@ -21,6 +21,10 @@ if ! python -c "import django" &> /dev/null; then
     pip install django || handle_error "Failed to install Django"
 fi
 
+echo "Installing system dependencies for MySQL client..."
+# Replace 'apt-get' with the package manager appropriate for your system
+sudo apt-get install -y libmysqlclient-dev || handle_error "Failed to install system dependencies for MySQL client"
+
 # Install Python dependencies
 echo "Installing Python dependencies from requirements.txt..."
 pip install -r requirements.txt || handle_error "Failed to install Python dependencies"
