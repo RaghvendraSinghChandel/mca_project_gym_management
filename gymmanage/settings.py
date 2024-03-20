@@ -83,10 +83,6 @@ WSGI_APPLICATION = 'gymmanage.wsgi.application'
 
 # Accessing DATABASE_URL environment variable
 
-from dotenv import load_dotenv
-
-load_dotenv()
-
 # Define the database configuration dictionary
 DATABASE_CONFIG = {
     'ENGINE': 'django.db.backends.mysql',
