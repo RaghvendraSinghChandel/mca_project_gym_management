@@ -6,14 +6,6 @@ handle_error() {
     exit 1
 }
 
-# Check if Homebrew is installed
-if ! command -v brew &> /dev/null; then
-    echo "Homebrew is not installed. Please install Homebrew and try again."
-    echo "You can install Homebrew by running the following command:"
-    echo "/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)""
-    handle_error "Homebrew not found"
-fi
-
 # Get the directory of the script
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
