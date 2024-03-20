@@ -27,7 +27,7 @@ pip install -r requirements.txt || handle_error "Failed to install Python depend
 
 # Run database migration script
 echo "Applying database migrations..."
-python3.9 manage.py migrate || handle_error "Database migration failed"
+python3.12 manage.py migrate || handle_error "Database migration failed"
 
 # Run fitness.sql to create required tables
 echo "Creating tables from fitness.sql..."
@@ -35,7 +35,7 @@ mysql -h "localhost" -u "root" -p"raghvendra" "gymdb" < fitness.sql || handle_er
 
 # Collect static files
 echo "Collecting static files..."
-python3.9 manage.py collectstatic --noinput || handle_error "Failed to collect static files"
+python3.12 manage.py collectstatic --noinput || handle_error "Failed to collect static files"
 
 # Deactivate the virtual environment
 deactivate
