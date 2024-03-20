@@ -6,12 +6,13 @@ handle_error() {
     exit 1
 }
 
-# Activate virtual environment
-source myenv/bin/activate
+# Activate the virtual environment
+source /Users/clanap.technologies/Downloads/gymTest/myenv/bin/activate
 
 # Check if Django is installed
-if ! python3.9 -c "import django" &>/dev/null; then
-    handle_error "Django is not installed. Please install Django using 'pip install django'"
+if ! python -c "import django" &> /dev/null; then
+    echo "Django is not installed. Installing Django..."
+    pip install django || handle_error "Failed to install Django"
 fi
 
 # Run database migration script
@@ -29,5 +30,8 @@ pip install -r requirements.txt || handle_error "Failed to install Python depend
 # Collect static files
 echo "Collecting static files..."
 python3.9 manage.py collectstatic --noinput || handle_error "Failed to collect static files"
+
+# Deactivate the virtual environment
+deactivate
 
 echo "Build completed successfully."
