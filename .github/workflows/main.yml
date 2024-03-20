@@ -35,7 +35,7 @@ jobs:
         python manage.py collectstatic --noinput
 
     - name: Deploy to Vercel
-      uses: amondnet/vercel-action@v21
+      uses: amondnet/vercel-action@v22
       with:
         vercel_token: ${{ secrets.VERCEL_TOKEN }}
         vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID }}
