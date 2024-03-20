@@ -10,15 +10,9 @@ handle_error() {
 echo "Upgrading pip..."
 pip install --upgrade pip || handle_error "Failed to upgrade pip"
 
-# Check if Homebrew is installed
-if ! command -v brew &> /dev/null; then
-    echo "Homebrew is not installed. Please install Homebrew and try again."
-    handle_error "Homebrew not found"
-fi
-
-# Install MySQL client dependencies
+# Install MySQL client dependencies (using pip)
 echo "Installing MySQL client dependencies..."
-brew install mysql || handle_error "Failed to install MySQL client dependencies"
+pip install mysqlclient || handle_error "Failed to install MySQL client dependencies"
 
 # Get the directory of the script
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
@@ -38,9 +32,8 @@ if ! python3 -c "import django" &> /dev/null; then
     pip install django || handle_error "Failed to install Django"
 fi
 
-echo "Installing system dependencies for MySQL client..."
-# Install MySQL client library using pip
-pip install mysqlclient || handle_error "Failed to install system dependencies for MySQL client"
-
 # Install Python dependencies
-echo "Installing Python dependencies from requirements.txt...
+echo "Installing Python dependencies from requirements.txt..."
+pip install -r requirements.txt || handle_error "Failed to install Python dependencies"
+
+echo "Setup complete!"
