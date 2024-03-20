@@ -23,7 +23,7 @@ fi
 
 echo "Installing system dependencies for MySQL client..."
 # Replace 'apt-get' with the package manager appropriate for your system
-sudo apt-get install -y libmysqlclient-dev || handle_error "Failed to install system dependencies for MySQL client"
+brew install -y libmysqlclient-dev || handle_error "Failed to install system dependencies for MySQL client"
 
 # Install Python dependencies
 echo "Installing Python dependencies from requirements.txt..."
