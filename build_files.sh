@@ -7,7 +7,7 @@ handle_error() {
 }
 
 # Activate the virtual environment
-source /Users/clanap.technologies/Downloads/gymTest/myenv/bin/activate
+source /Users/clanap.technologies/Downloads/gymTest/myenv/bin/activate || handle_error "Failed to activate virtual environment"
 
 # Check if dotenv is installed
 if ! python -c "import dotenv" &> /dev/null; then
@@ -22,8 +22,14 @@ if ! python -c "import django" &> /dev/null; then
 fi
 
 echo "Installing system dependencies for MySQL client..."
-# Replace 'apt-get' with the package manager appropriate for your system
-brew install -y libmysqlclient-dev || handle_error "Failed to install system dependencies for MySQL client"
+# Check if Homebrew is installed
+if ! command -v brew &> /dev/null; then
+    echo "Homebrew is not installed. Please install Homebrew and try again."
+    handle_error "Homebrew not found"
+fi
+
+# Install MySQL client library
+brew install libmysqlclient-dev || handle_error "Failed to install system dependencies for MySQL client"
 
 # Install Python dependencies
 echo "Installing Python dependencies from requirements.txt..."
@@ -31,7 +37,7 @@ pip install -r requirements.txt || handle_error "Failed to install Python depend
 
 # Run database migration script
 echo "Applying database migrations..."
-python3.12 manage.py migrate || handle_error "Database migration failed"
+python manage.py migrate || handle_error "Database migration failed"
 
 # Run fitness.sql to create required tables
 echo "Creating tables from fitness.sql..."
@@ -39,7 +45,7 @@ mysql -h "localhost" -u "root" -p"raghvendra" "gymdb" < fitness.sql || handle_er
 
 # Collect static files
 echo "Collecting static files..."
-python3.12 manage.py collectstatic --noinput || handle_error "Failed to collect static files"
+python manage.py collectstatic --noinput || handle_error "Failed to collect static files"
 
 # Deactivate the virtual environment
 deactivate
