@@ -87,20 +87,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
-DB_HOST = os.environ.get('DB_HOST')
-DB_PORT = os.environ.get('DB_PORT')
-DB_USER = os.environ.get('DB_USER')
-DB_PASSWORD = os.environ.get('DB_PASSWORD')
-DB_NAME = os.environ.get('DB_NAME')
-
 # Define the database configuration dictionary
 DATABASE_CONFIG = {
     'ENGINE': 'django.db.backends.mysql',
-    'NAME': DB_NAME,
-    'USER': DB_USER,
-    'PASSWORD': DB_PASSWORD,
-    'HOST': DB_HOST,
+    'NAME': 'gymdb',
+    'USER': 'root',
+    'PASSWORD': 'raghvendra',
+    'HOST': 'localhost',
     'PORT': 3306,
 }
 

@@ -6,10 +6,10 @@ handle_error() {
     exit 1
 }
 
-# Check if environment variables are set
-if [[ -z "$DB_HOST" || -z "$DB_USER" || -z "$DB_PASSWORD" || -z "$DB_NAME" ]]; then
-    handle_error "One or more required environment variables are not set"
-fi
+# # Check if environment variables are set
+# if [[ -z "$DB_HOST" || -z "$DB_USER" || -z "$DB_PASSWORD" || -z "$DB_NAME" ]]; then
+#     handle_error "One or more required environment variables are not set"
+# fi
 
 # Run database migration script
 echo "Applying database migrations..."
@@ -17,7 +17,7 @@ python3.9 manage.py migrate || handle_error "Database migration failed"
 
 # Run fitness.sql to create required tables
 echo "Creating tables from fitness.sql..."
-mysql -h "$DB_HOST" -u "$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" < fitness.sql || handle_error "Failed to execute fitness.sql"
+mysql -h "localhost" -u "root" -p"raghvendra" "gymdb" < fitness.sql || handle_error "Failed to execute fitness.sql"
 
 # Install Python dependencies
 echo "Installing Python dependencies..."
