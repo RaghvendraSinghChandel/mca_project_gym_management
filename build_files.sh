@@ -6,10 +6,13 @@ handle_error() {
     exit 1
 }
 
-# # Check if environment variables are set
-# if [[ -z "$DB_HOST" || -z "$DB_USER" || -z "$DB_PASSWORD" || -z "$DB_NAME" ]]; then
-#     handle_error "One or more required environment variables are not set"
-# fi
+# Activate virtual environment
+source /Users/clanap.technologies/Downloads/gymTest/myenv/bin/activate
+
+# Check if Django is installed
+if ! python3.9 -c "import django" &>/dev/null; then
+    handle_error "Django is not installed. Please install Django using 'pip install django'"
+fi
 
 # Run database migration script
 echo "Applying database migrations..."
