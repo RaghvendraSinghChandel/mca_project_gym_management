@@ -16,3 +16,4 @@ setting_module = 'gymmanage.deployment' if 'WEBSITE_HOSTNAME' in os.environ else
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', setting_module)
 
 application = get_wsgi_application()
+app = application
