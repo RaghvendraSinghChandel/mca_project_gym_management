@@ -29,6 +29,9 @@ jobs:
       
       - name: Install dependencies
         run: pip install -r requirements.txt
+      
+      - name: collect static files
+        run: python manage.py collectstatics
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
@@ -61,7 +64,11 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
-      
+      - name: Execute SQL script to initialize database tables
+        run: |
+          mysql -u mobwsugkhg -p Raghvendra1 -h raghvendragym.mysql.database.azure.com -P DB_PORT = 3306 -D raghvendragym < fitness.sql
+
+
       - name: Login to Azure
         uses: azure/login@v1
         with:
