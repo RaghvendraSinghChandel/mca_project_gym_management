@@ -14,11 +14,11 @@ import datetime
 import mysql.connector as mcdb
 
 # Assuming you have the individual connection parameters in your environment
-DB_HOST = os.environ.get('DB_HOST')
+DB_HOST = 'raghvendragym.mysql.database.azure.com'
 DB_PORT = 3306
-DB_USER = os.environ.get('DB_USER')
-DB_PASSWORD = os.environ.get('DB_PASSWORD')
-DB_NAME = os.environ.get('DB_NAME')
+DB_USER = 'mobwsugkhg'
+DB_PASSWORD = 'Raghvendra1'
+DB_NAME = 'raghvendragym'
 
 # Establish a connection to the database using the individual parameters
 conn = mcdb.connect(
