@@ -31,7 +31,7 @@ jobs:
         run: pip install -r requirements.txt
       
       - name: collect static files
-        run: python manage.py collectstatics
+        run: python manage.py collectstatic
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
