@@ -2,7 +2,7 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 # More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
 
-name: Build and deploy Python app to Azure Web App - raghvendragym
+name: raghvndra yml
 
 on:
   push:
@@ -29,6 +29,9 @@ jobs:
       
       - name: Install dependencies
         run: pip install -r requirements.txt
+      
+      - name: collect static files
+        run: python manage.py collectstatics
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
@@ -61,13 +64,17 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
-      
+      - name: Execute SQL script to initialize database tables
+        run: |
+          mysql -u mobwsugkhg -p Raghvendra1 -h raghvendragym.mysql.database.azure.com -P DB_PORT = 3306 -D raghvendragym < fitness.sql
+
+
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_1D30B74588804BE9A6E024D46524DCAA }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_3E94BD07474743BEBF274091B25352DC }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A9B6D4CD50C045EE855F2474F5B05DB9 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_FFEAB98A60C245788D3732CB29263BFE }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_821252A21328464BBF594BA9CAFF24B8 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_80CC77BF61B44FFC927293F5BDEA69B4 }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
