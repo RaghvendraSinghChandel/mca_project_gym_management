@@ -66,7 +66,8 @@ jobs:
 
       - name: Execute SQL script to initialize database tables
         run: |
-          mysql -u mobwsugkhg -p Raghvendra1 -h raghvendragym.mysql.database.azure.com -P DB_PORT = 3306 -D raghvendragym < fitness.sql
+          mysql -u mobwsugkhg -pRaghvendra1 -h raghvendragym.mysql.database.azure.com -P 3306 -D raghvendragym < fitness.sql
+
 
 
       - name: Login to Azure
