@@ -64,11 +64,6 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
-      - name: Execute SQL script to initialize database tables
-        run: |
-          mysql -u mobwsugkhg -pRaghvendra1 -h raghvendragym.mysql.database.azure.com -P 3306 -D raghvendragym < fitness.sql
-
-
 
       - name: Login to Azure
         uses: azure/login@v1
